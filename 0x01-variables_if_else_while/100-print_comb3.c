@@ -21,6 +21,10 @@ int main(void)
 			{
 				putchar(i);
 				putchar(d);
+
+				if (i == '8' && d == '9')
+					continue;
+
 				putchar(',');
 				putchar(' ');
 			}
