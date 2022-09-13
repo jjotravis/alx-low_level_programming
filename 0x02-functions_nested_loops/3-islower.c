@@ -7,18 +7,10 @@
  */
 int _islower(int c)
 {
-	char i;
-	int j;
-
-	for (i = 'a'; i <= 'z'; i++)
+	if (c >= 'a' && c <= 'z')
 	{
-		if (i == c)
-		{
-			j = 1;
-		}
-		else
-			j = 0;
+		return (1);
 	}
-
-	return (j);
+	else
+		return (0);
 }
