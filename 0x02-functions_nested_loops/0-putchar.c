@@ -4,19 +4,16 @@
 /**
  * main - Entry point
  * Description: prints _putchar followed by new line
- * Return:
+ * Return: 0 on success
  */
 
 int main(void)
 {
-	int n = 0;
-	char str[9] = "_putchar";
+	int n;
+	char str[8] = "_putchar";
 
-	while (n < 9)
-	{
+	for (n = 0; n < 9; n++)
 		_putchar(str[n]);
-		n += 1;
-	}
 	_putchar('\n');
 
 	return (0);
