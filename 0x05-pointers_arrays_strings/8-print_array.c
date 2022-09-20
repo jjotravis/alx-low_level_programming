@@ -3,8 +3,8 @@
 
 /**
  * print_array - prints the elements of an array
- * @a:
- * @n:
+ * @a: array
+ * @n: number of elements in array
  * Return: Nothing
  */
 
