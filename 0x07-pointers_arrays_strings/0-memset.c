@@ -5,6 +5,7 @@
  * @s: destination pointer
  * @b: value to be filled in
  * @n: number of bytes to be filled
+ * Return: pointer to memory of s
  */
 char *_memset(char *s, char b, unsigned int n)
 {
@@ -14,5 +15,5 @@ char *_memset(char *s, char b, unsigned int n)
 	{
 		*p++ = (unsigned char) b;
 	}
-	return s;
+	return (s);
 }
