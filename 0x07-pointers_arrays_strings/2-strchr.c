@@ -8,7 +8,7 @@
  */
 char *_strchr(char *s, char c)
 {
-	char *find;
+	char *find = '\0';
 
 	if (*s  != '\0')
 	{
