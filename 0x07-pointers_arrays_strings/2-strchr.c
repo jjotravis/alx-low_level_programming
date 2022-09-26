@@ -18,7 +18,7 @@ char *_strchr(char *s, char c)
 				find = s;
 				break;
 			}
-		} while (s++);
+		} while (*s++);
 	}
 	return (find);
 }
