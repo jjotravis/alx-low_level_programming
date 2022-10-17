@@ -5,6 +5,10 @@
  * @array: array of integers to be scanned
  * @size: size of the array
  * @cmp: pointer to function used to compare values
+ *
+ * Return: if no elements match return -1
+ * if size <= 0, return -1
+ * else returns index for element for cmp not 0
  */
 
 int int_index(int *array, int size, int (*cmp)(int))
