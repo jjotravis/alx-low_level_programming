@@ -8,7 +8,7 @@
 /**
  * create_file - function that creates a file
  * @filename: is the name of file to create
- * @text_content: Null terminated string 
+ * @text_content: Null terminated string
  *
  * Return: 1 on success or -1 on failure
  */
