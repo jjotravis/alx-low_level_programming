@@ -18,7 +18,7 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 		return (NULL);
 
 	new_node = malloc(sizeof(listint_t));
-	if (new_node == NULL)
+	if (new_node == NULL || idx > listint_len(*head))
 		return (NULL);
 	if (*head == NULL)
 	{
@@ -44,4 +44,24 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 	new_node->next = temp->next;
 	temp->next = new_node;
 	return (new_node);
+}
+
+/**
+ * listint_len - counts number of nodes in a list
+ * @h: head of the list
+ *
+ * Return: number of nodes
+ */
+size_t listint_len(const listint_t *h)
+{
+	const listint_t *temp;
+	size_t count = 0;
+
+	temp = h;
+	while (temp)
+	{
+		count += 1;
+		temp = temp->next;
+	}
+	return (count);
 }
