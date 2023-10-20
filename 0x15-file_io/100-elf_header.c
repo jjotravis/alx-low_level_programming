@@ -11,7 +11,7 @@ void type(unsigned int type, unsigned char *ident)
 {
 	ident[EI_DATA] == ELFDATA2MSB ? type = type >> 8 : type;
 
-	printf("Type:                              ");
+	printf("  Type:                              ");
 	if (type == ET_NONE)
 		printf("NONE (Unknown type)\n");
 	else if (type == ET_REL)
@@ -33,7 +33,7 @@ void type(unsigned int type, unsigned char *ident)
  */
 void osabi(unsigned char *ident)
 {
-	printf("OS/ABI:                            ");
+	printf("  OS/ABI:                            ");
 	if (ident[EI_OSABI] == ELFOSABI_SYSV)
 		printf("UNIX - System V\n");
 	else if (ident[EI_OSABI] == ELFOSABI_HPUX)
@@ -88,22 +88,22 @@ void displayElfHeader(ElfHeader *header)
 	int i;
 
 	verify(header->ident);
-	printf("Magic: ");
+	printf("Magic:   ");
 	for (i = 0; i < 16; i++)
 	{
 		printf("%02x", header->ident[i]);
 		if (i < 15)
 			printf(" ");
 	}
-	printf("\nClass:                             %s\n",
+	printf("\n  Class:                             %s\n",
 		header->ident[4] == 1 ? "ELF32" : "ELF64");
-	printf("Data:                              %s\n", header->ident[5] == 1 ?
+	printf("  Data:                              %s\n", header->ident[5] == 1 ?
 		"2's complement, little-endian" : "2's complement, big-endian");
-	printf("Version:                           %d (current)\n", header->ident[6]);
+	printf("  Version:                           %d (current)\n", header->ident[6]);
 	osabi(header->ident);
-	printf("ABI Version:                       %d\n", header->ident[8]);
+	printf("  ABI Version:                       %d\n", header->ident[8]);
 	type(header->type, header->ident);
-	printf("Entry point address:               0x%08x\n", header->entry);
+	printf("  Entry point address:               0x%08x\n", header->entry);
 }
 
 /**
