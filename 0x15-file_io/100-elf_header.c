@@ -88,7 +88,7 @@ void displayElfHeader(ElfHeader *header)
 	int i;
 
 	verify(header->ident);
-	printf("Magic:   ");
+	printf("  Magic:   ");
 	for (i = 0; i < 16; i++)
 	{
 		printf("%02x", header->ident[i]);
@@ -103,7 +103,7 @@ void displayElfHeader(ElfHeader *header)
 	osabi(header->ident);
 	printf("  ABI Version:                       %d\n", header->ident[8]);
 	type(header->type, header->ident);
-	printf("  Entry point address:               0x%08x\n", header->entry);
+	printf("  Entry point address:               0x%7x\n", header->entry);
 }
 
 /**
