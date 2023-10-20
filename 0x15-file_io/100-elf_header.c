@@ -11,7 +11,7 @@ void type(unsigned int type, unsigned char *ident)
 {
 	ident[EI_DATA] == ELFDATA2MSB ? type = type >> 8 : type;
 
-	printf("Type:							  ");
+	printf("Type:                              ");
 	if (type == ET_NONE)
 		printf("NONE (Unknown type)\n");
 	else if (type == ET_REL)
@@ -33,7 +33,7 @@ void type(unsigned int type, unsigned char *ident)
  */
 void osabi(unsigned char *ident)
 {
-	printf("OS/ABI:							");
+	printf("OS/ABI:                            ");
 	if (ident[EI_OSABI] == ELFOSABI_SYSV)
 		printf("UNIX - System V\n");
 	else if (ident[EI_OSABI] == ELFOSABI_HPUX)
@@ -58,8 +58,25 @@ void osabi(unsigned char *ident)
 		printf("<unknown: %x>\n", ident[EI_OSABI]);
 }
 
+/**
+* verify- verify the file to check if is a ELF
+* @e_ident: the ELF struct
+* return: no return is a void func.
+*/
 
-
+void verify(unsigned char *e_ident)
+{
+	if (*(e_ident) == 0x7f && *(e_ident + 1) == 'E' &&
+	    *(e_ident + 2) == 'L' && *(e_ident + 3) == 'F')
+	{
+		printf("ELF Header:\n");
+	}
+	else
+	{
+		dprintf(STDERR_FILENO, "Error: this file not is a valid ELF\n");
+		exit(98);
+	}
+}
 
 /**
  * displayElfHeader - Function to display ELF header information
@@ -70,6 +87,7 @@ void displayElfHeader(ElfHeader *header)
 {
 	int i;
 
+	verify(header->ident);
 	printf("Magic: ");
 	for (i = 0; i < 16; i++)
 	{
@@ -77,29 +95,15 @@ void displayElfHeader(ElfHeader *header)
 		if (i < 15)
 			printf(" ");
 	}
-	printf("\nClass:							  %s\n", header->ident[4] == 1 ? "ELF32" : "ELF64");
-	printf("Data:							   %s\n", header->ident[5] == 1 ?
+	printf("\nClass:                             %s\n",
+		header->ident[4] == 1 ? "ELF32" : "ELF64");
+	printf("Data:                              %s\n", header->ident[5] == 1 ?
 		"2's complement, little-endian" : "2's complement, big-endian");
-	printf("Version:							%d (current)\n", header->ident[6]);
-	/*printf("OS/ABI:							 %d\n", header->ident[7]);*/
+	printf("Version:                           %d (current)\n", header->ident[6]);
 	osabi(header->ident);
-	printf("ABI Version:						%d\n", header->ident[8]);
-	/*printf("Type:							   0x%04x\n", header->type);*/
+	printf("ABI Version:                       %d\n", header->ident[8]);
 	type(header->type, header->ident);
-	printf("Machine:							0x%04x\n", header->machine);
-	printf("Version:							0x%08x\n", header->version);
-	printf("Entry point address:				0x%08x\n", header->entry);
-	printf("Start of program headers:		  %lu (bytes into file)\n",
-		(unsigned long)header->phoff);
-	printf("Start of section headers:		  %lu (bytes into file)\n",
-		(unsigned long)header->shoff);
-	printf("Flags:							 0x%08x\n", header->flags);
-	printf("Size of this header:			   %u (bytes)\n", header->ehsize);
-	printf("Size of program headers:		   %u (bytes)\n", header->phentsize);
-	printf("Number of program headers:		 %u\n", header->phnum);
-	printf("Size of section headers:		   %u (bytes)\n", header->shentsize);
-	printf("Number of section headers:		 %u\n", header->shnum);
-	printf("Section header string table index: %u\n", header->shstrndx);
+	printf("Entry point address:               0x%08x\n", header->entry);
 }
 
 /**
